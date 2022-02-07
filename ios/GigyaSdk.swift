@@ -88,6 +88,8 @@ class GigyaSdk: NSObject {
           return  GigyaSocialProviders.amazon
       case "google":
         return  GigyaSocialProviders.google
+      case "line":
+        return  GigyaSocialProviders.line
       default:
           return  GigyaSocialProviders.facebook
     }
