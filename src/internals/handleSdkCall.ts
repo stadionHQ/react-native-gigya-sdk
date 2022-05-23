@@ -11,7 +11,7 @@ export default function <T>(
       try {
         response = await sdkCall
       } catch (e) {
-        return reject(formatError(e))
+        return reject(formatError(e as any))
       }
 
       if (!options?.noParsing) {
