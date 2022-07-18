@@ -1,4 +1,4 @@
-import { NativeModules, Alert } from 'react-native'
+import { NativeModules } from 'react-native'
 const { GigyaSdk } = NativeModules
 
 import type { GigyaSdkAccountInfoType, GigyaSdkLoginType } from '../types'
@@ -17,7 +17,6 @@ export default function <ParamsType extends Record<string, unknown>>(
 ): Promise<GigyaSdkAccountInfoType> {
   return new Promise(async (resolve, reject) => {
     if (params?.loginMode && !params.regToken) {
-      Alert.alert('reject');
       reject(
         new Error(
           "regToken is required when using loginMode. Use GigyaSdk.linkToSocialProvider() instead if you're trying to resolve an account conflict."
@@ -37,7 +36,6 @@ export default function <ParamsType extends Record<string, unknown>>(
           JSON.stringify({ lang, ...(rest && rest) })
         )
       )
-      Alert.alert('response', response.toString());
 
       await setState({ UID: response.UID })
 
@@ -47,7 +45,6 @@ export default function <ParamsType extends Record<string, unknown>>(
 
       resolve(response)
     } catch (e) {
-      Alert.alert('error', e.toString());
       if (await isGigyaError(e)) {
         try {
           await saveAuthenticationAttempt(provider, e)
